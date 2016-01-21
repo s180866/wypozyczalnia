@@ -1,3 +1,7 @@
+app_orders:
+    resource: "@AppBundle/Controller/OrdersController.php"
+    type:     annotation
+
 #app:
 #    resource: "@AppBundle/Controller/"
 #    type:     annotation

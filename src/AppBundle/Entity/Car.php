@@ -45,7 +45,7 @@ class Car
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="blob")
+     * @ORM\Column(name="photo", type="string")
      */
     private $photo;
 
