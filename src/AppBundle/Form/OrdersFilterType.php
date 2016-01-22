@@ -42,4 +42,11 @@ class OrdersFilterType extends AbstractType
     {
         return 'appbundle_ordersfiltertype';
     }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'csrf_protection' => false
+        ));
+    }
 }

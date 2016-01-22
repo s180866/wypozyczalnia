@@ -19,6 +19,7 @@ class OrdersType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
+            'csrf_protection' => false,
             'data_class' => 'AppBundle\Entity\Orders'
         ));
     }
