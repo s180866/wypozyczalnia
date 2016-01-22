@@ -14,9 +14,12 @@ class OrdersFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'filter_number_range')
-            ->add('created', 'filter_date_range')
+//            ->add('id', 'filter_number_range')
+//            ->add('created', 'filter_date_range')
             ->add('status', 'filter_text')
+            ->add('user', 'entity', [
+                'class' => 'AppBundle\Entity\User'
+            ])
         ;
 
         $listener = function(FormEvent $event)

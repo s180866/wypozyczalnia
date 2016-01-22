@@ -181,4 +181,9 @@ class Car
     {
         return $this->price;
     }
+
+    function __toString()
+    {
+        return (String) $this->getName();
+    }
 }

@@ -72,12 +72,7 @@ class OrdersController extends Controller
                 $session->set('OrdersControllerFilter', $filterData);
             }
         } else {
-            // Get filter from session
-            if ($session->has('OrdersControllerFilter')) {
-                $filterData = $session->get('OrdersControllerFilter');
-                $filterForm = $this->createForm(new OrdersFilterType(), $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
-            }
+
         }
 
         return array($filterForm, $queryBuilder);

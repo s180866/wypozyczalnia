@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Orders;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -159,6 +161,37 @@ class CarController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Displays a form to create a new Car entity.
+     *
+     * @Route("/hire/{car}", name="car_hire")
+     * @Method("GET")
+     * @param Car $car
+     * @return RedirectResponse
+     */
+    public function hireAction(Car $car)
+    {
+        if ($car->getAmount() < 1 )
+        {
+            $this->addFlash('error', 'Brak wolnych pojazdów');
+            return $this->redirectToRoute('car_show', ['id' => $car->getId()]);
+        }
+        $entity = new Orders();
+
+        $entity
+            ->setCar($car)
+            ->setUser($this->getUser())
+            ->setStatus('Do zapłaty');
+
+        $car->setAmount($car->getAmount() - 1);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirectToRoute('orders');
     }
 
     /**

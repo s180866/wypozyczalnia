@@ -35,6 +35,21 @@ class Orders
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Car")
+     */
+    private $car;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
+
 
     /**
      * Get id
@@ -90,5 +105,43 @@ class Orders
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     * @return $this
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCar()
+    {
+        return $this->car;
+    }
+
+    /**
+     * @param mixed $car
+     * @return $this
+     */
+    public function setCar($car)
+    {
+        $this->car = $car;
+
+        return $this;
     }
 }
