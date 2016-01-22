@@ -1,12 +1,12 @@
 {% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
 
 {% block title %}
-{{ parent() }} - {{ 'views.new.creation'|trans({'%entity%': 'Car'}, 'JordiLlonchCrudGeneratorBundle') }}
+{{ parent() }}{{ 'views.new.creation'|trans({'%entity%': 'Car'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
 {% block page %}
 
-<h1>{{ 'views.new.creation'|trans({'%entity%': 'Car'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
+<h1>{{ 'views.new.creation'|trans({'%entity%': 'Samochód'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
 
 <form class="well" action="{{ path('car_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}

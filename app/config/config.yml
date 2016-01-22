@@ -37,6 +37,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_horizontal_layout.html.twig']
+    form_themes:
+        # other form themes
+        - 'VichUploaderBundle:Form:fields.html.twig'
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -76,3 +79,10 @@ twig:
     form:
         resources:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+        product_image:
+            uri_prefix:         /images/products
+            upload_destination: %kernel.root_dir%/../web/images/products

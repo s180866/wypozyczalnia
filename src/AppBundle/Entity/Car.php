@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * Car
  *
  * @ORM\Table(name="car")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CarRepository")
+ * @Vich\Uploadable
  */
 class Car
 {
@@ -43,9 +47,16 @@ class Car
     private $amount;
 
     /**
+     * @ORM\Column(type="string", length=255, name="image_name")
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string")
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
      */
     private $photo;
 
@@ -56,6 +67,12 @@ class Car
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true, name="update_at")
+     *
+     * @var string
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -136,23 +153,34 @@ class Car
         return $this->amount;
     }
 
+
+
     /**
-     * Set photo
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
      *
-     * @param string $photo
-     * @return Car
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Product
      */
-    public function setPhoto($photo)
+    public function setPhoto(File $image = null)
     {
-        $this->photo = $photo;
+        $this->photo = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
 
         return $this;
     }
 
     /**
-     * Get photo
-     *
-     * @return string 
+     * @return File
      */
     public function getPhoto()
     {
@@ -185,5 +213,42 @@ class Car
     function __toString()
     {
         return (String) $this->getName();
+    }
+
+    /**
+     * @param mixed $imageName
+     * @return Car
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param string $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

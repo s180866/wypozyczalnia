@@ -11,11 +11,22 @@ class CarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('year')
-            ->add('amount')
-            ->add('photo')
-            ->add('price')
+            ->add('name', 'text', [
+                'label' => 'Nazwa'
+            ])
+            ->add('year', 'integer', [
+                'label' => 'Rok produkcji'
+            ])
+            ->add('amount', 'integer', [
+                'label' => 'Ilość dostępnych'
+            ])
+            ->add('photo', 'vich_image', [
+                'label' => 'Zdjęcie',
+                'required' => false
+            ])
+            ->add('price', null, [
+                'label' => 'Koszt'
+            ])
         ;
     }
 
