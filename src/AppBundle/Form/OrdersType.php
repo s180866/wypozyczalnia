@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Orders;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,9 +12,15 @@ class OrdersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status')
-            ->add('car')
-            ->add('user')
+            ->add('status', 'choice', [
+                'choices' => Orders::getStatuses()
+            ])
+            ->add('car', null, [
+                'required' => true
+            ])
+            ->add('user', null, [
+                'required' => true
+            ])
         ;
     }
 

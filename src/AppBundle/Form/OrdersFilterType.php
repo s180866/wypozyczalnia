@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Car;
+use AppBundle\Entity\Orders;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,10 +17,15 @@ class OrdersFilterType extends AbstractType
     {
         $builder
 //            ->add('id', 'filter_number_range')
-//            ->add('created', 'filter_date_range')
-            ->add('status', 'filter_text')
+            //->add('created', 'filter_date_range')
+            ->add('status', 'choice', [
+                'choices' => Orders::getStatuses()
+            ])
             ->add('user', 'entity', [
                 'class' => 'AppBundle\Entity\User'
+            ])
+            ->add('car', 'entity', [
+                'class' => 'AppBundle\Entity\Car'
             ])
         ;
 

@@ -94,6 +94,9 @@ class Orders
     {
         $this->status = $status;
 
+        if ($status == 'Anulowane' || $status == 'Zakończone') {
+            $this->getCar()->setAmount($this->getCar()->getAmount()+1);
+        }
         return $this;
     }
 
@@ -127,7 +130,7 @@ class Orders
     }
 
     /**
-     * @return mixed
+     * @return Car
      */
     public function getCar()
     {
@@ -143,5 +146,14 @@ class Orders
         $this->car = $car;
 
         return $this;
+    }
+
+    public static function getStatuses() {
+        return [
+            'Zapłacone' => 'Zapłacone',
+            'Do zapłaty' => 'Do zapłaty',
+            'Zakończono' => 'Zakończono',
+            'Anulowane' => 'Anulowane',
+        ];
     }
 }

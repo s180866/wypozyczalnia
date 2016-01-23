@@ -96,6 +96,7 @@ class CarController extends Controller
         $pagerfanta = new Pagerfanta($adapter);
         $currentPage = $this->getRequest()->get('page', 1);
         $pagerfanta->setCurrentPage($currentPage);
+        $pagerfanta->setMaxPerPage(6);
         $entities = $pagerfanta->getCurrentPageResults();
 
         // Paginator - route generator

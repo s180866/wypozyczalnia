@@ -1,7 +1,7 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block title %}
-{{ parent() }}{{ 'views.new.creation'|trans({'%entity%': 'Car'}, 'JordiLlonchCrudGeneratorBundle') }}
+{{ parent() }}{{ 'views.new.creation'|trans({'%entity%': 'samochód'}, 'JordiLlonchCrudGeneratorBundle') }}
 {% endblock %}
 
 {% block page %}
