@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Car
@@ -43,6 +43,7 @@ class Car
      * @var int
      *
      * @ORM\Column(name="amount", type="integer")
+     * @Assert\Range(min = 0)
      */
     private $amount;
 
@@ -64,6 +65,7 @@ class Car
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+     * @Assert\Range(min = 0)
      */
     private $price;
 
