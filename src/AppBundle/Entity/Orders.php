@@ -22,6 +22,13 @@ class Orders
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="days", type="integer")
+     */
+    private $days;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
@@ -92,11 +99,11 @@ class Orders
      */
     public function setStatus($status)
     {
-        $this->status = $status;
-
-        if ($status == 'Anulowane' || $status == 'Zakończone') {
+        if (($status == 'Anulowane' || $status == 'Zakończono') && $status !== $this->getStatus()) {
             $this->getCar()->setAmount($this->getCar()->getAmount()+1);
         }
+
+        $this->status = $status;
         return $this;
     }
 
@@ -155,5 +162,24 @@ class Orders
             'Zakończono' => 'Zakończono',
             'Anulowane' => 'Anulowane',
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * @param int $days
+     * @return $this
+     */
+    public function setDays($days)
+    {
+        $this->days = $days;
+
+        return $this;
     }
 }

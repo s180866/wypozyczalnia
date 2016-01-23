@@ -54,6 +54,8 @@
             <th>Id</th>
             <th>Utworzone</th>
             <th>Status zamówienia</th>
+            <th>Liczba dni</th>
+            <th>Całkowity koszt</th>
             <th>Użytkownik</th>
             <th>Samochód</th>
             <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
@@ -65,6 +67,8 @@
             <td><a href="{{ path('orders_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{{ entity.status }}</td>
+            <td>{{ entity.days }}</td>
+            <td>{{ entity.days * entity.car.price }} zł</td>
             <td>{{ entity.user }}</td>
             <td>{{ entity.car }}</td>
             <td>

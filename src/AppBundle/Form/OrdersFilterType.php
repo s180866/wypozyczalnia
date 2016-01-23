@@ -19,13 +19,16 @@ class OrdersFilterType extends AbstractType
 //            ->add('id', 'filter_number_range')
             //->add('created', 'filter_date_range')
             ->add('status', 'choice', [
-                'choices' => Orders::getStatuses()
+                'choices' => Orders::getStatuses(),
+                'required' => false
             ])
             ->add('user', 'entity', [
-                'class' => 'AppBundle\Entity\User'
+                'class' => 'AppBundle\Entity\User',
+                'required' => false
             ])
             ->add('car', 'entity', [
-                'class' => 'AppBundle\Entity\Car'
+                'class' => 'AppBundle\Entity\Car',
+                'required' => false
             ])
         ;
 

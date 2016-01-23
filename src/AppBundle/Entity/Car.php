@@ -36,6 +36,7 @@ class Car
      * @var int
      *
      * @ORM\Column(name="year", type="integer")
+     * @Assert\Range(min = 1960, max=2016)
      */
     private $year;
 

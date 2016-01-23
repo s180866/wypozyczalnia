@@ -95,8 +95,8 @@ class CarController extends Controller
         $adapter = new DoctrineORMAdapter($queryBuilder);
         $pagerfanta = new Pagerfanta($adapter);
         $currentPage = $this->getRequest()->get('page', 1);
-        $pagerfanta->setCurrentPage($currentPage);
         $pagerfanta->setMaxPerPage(6);
+        $pagerfanta->setCurrentPage($currentPage);
         $entities = $pagerfanta->getCurrentPageResults();
 
         // Paginator - route generator
@@ -169,10 +169,11 @@ class CarController extends Controller
      *
      * @Route("/hire/{car}", name="car_hire")
      * @Method("GET")
+     * @param Request $request
      * @param Car $car
      * @return RedirectResponse
      */
-    public function hireAction(Car $car)
+    public function hireAction(Request $request, Car $car)
     {
         if ($car->getAmount() < 1 )
         {
@@ -184,6 +185,7 @@ class CarController extends Controller
         $entity
             ->setCar($car)
             ->setUser($this->getUser())
+            ->setDays($request->get('days', 1))
             ->setStatus('Do zapłaty');
 
         $car->setAmount($car->getAmount() - 1);
@@ -192,6 +194,7 @@ class CarController extends Controller
         $em->persist($entity);
         $em->flush();
 
+        $this->addFlash('success', 'Zamówienie zostało zapisane, czekamy na kontakt w salonie');
         return $this->redirectToRoute('orders');
     }
 

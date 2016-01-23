@@ -28,4 +28,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/orders, role: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/car/new, role: ROLE_ADMIN }
+        - { path: ^/orders/new, role: ROLE_ADMIN }

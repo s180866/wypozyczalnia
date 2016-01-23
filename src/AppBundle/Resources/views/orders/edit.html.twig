@@ -6,7 +6,7 @@ Edytuj zamówienie
 
 {% block page %}
 
-<h1>{{ 'views.edit.edit'|trans({'%entity%': 'Orders'}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
+<h1>Edytuj zamówienie</h1>
 
 <form class="well" action="{{ path('orders_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     <input type="hidden" name="_method" value="PUT" />

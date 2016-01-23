@@ -41,6 +41,29 @@
                 <span class="input-xlarge uneditable-input">{{ entity.price }} zł</span>
             </div>
         </div>
+        <div class="control-group">
+            <label class="control-label">Szacunkowy koszt wynajmu</label>
+            <div class="controls">
+                <input type="number" id="days" class="form-control" style="width: 50px" min="1" value="1"/>
+                <span class="input-xlarge uneditable-input" id="amount">
+                    {{ entity.price }} zł
+                </span>
+                <script>
+                    function defer(method) {
+                        if (window.jQuery)
+                            method();
+                        else
+                            setTimeout(function() { defer(method) }, 50);
+                    }
+
+                    defer(function(){$('#days').on('change', function() {
+                        $('#amount').html($(this).val()*{{ entity.price }} + ' zł');
+
+                        $('#url').attr('href', $('#url').attr('href').replace(/days=\d*/g, "days="+$(this).val()));
+                    })});
+                </script>
+            </div>
+        </div>
     </fieldset>
 </form>
 
@@ -51,7 +74,7 @@
         </a>
     </div>
     <div class="float-left">
-        <a class="btn btn-success" href="{% if app.user %}{{ path('car_hire', {'car': entity.id}) }}{% else %}javascript: alert('Musisz się zalogować'){% endif %}" >
+        <a id="url" class="btn btn-success" href="{% if app.user %}{{ path('car_hire', {'car': entity.id}) }}?days=1{% else %}javascript: alert('Musisz się zalogować'){% endif %}" >
             Wynajmij
         </a>
     </div>
