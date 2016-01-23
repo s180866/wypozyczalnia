@@ -52,8 +52,16 @@ class OrdersController extends Controller
         $session = $request->getSession();
         $filterForm = $this->createForm(new OrdersFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('AppBundle:Orders')->createQueryBuilder('e');
+        $queryBuilder = $em
+            ->getRepository('AppBundle:Orders')
+            ->createQueryBuilder('e')
+            ->orderBy('e.created', 'DESC');
 
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $queryBuilder
+                ->andWhere('e.user = :user')
+                ->setParameter('user', $this->getUser()->getId());
+        }
         // Reset filter
         if ($request->get('filter_action') == 'reset') {
             $session->remove('OrdersControllerFilter');

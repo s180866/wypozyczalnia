@@ -1,4 +1,4 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block title %}
 {{ parent() }}{{ 'views.show.show'|trans({'%entity%': 'Car'}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -51,7 +51,7 @@
         </a>
     </div>
     <div class="float-left">
-        <a class="btn btn-success" href="{{ path('car_hire', {'car': entity.id}) }}">
+        <a class="btn btn-success" href="{% if app.user %}{{ path('car_hire', {'car': entity.id}) }}{% else %}javascript: alert('Musisz się zalogować'){% endif %}" >
             Wynajmij
         </a>
     </div>
