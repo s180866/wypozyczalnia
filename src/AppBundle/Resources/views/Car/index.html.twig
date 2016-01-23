@@ -10,34 +10,42 @@
 <div class="row-fluid">
     <ul class="thumbnails">
         {% for entity in entities %}
-        <li class="span4">
-            <div class="thumbnail" >
-                {#<img src="" alt="" style="height: 350px; width: auto;max-width:none"/>#}
-                <div style="background:url({% if entity.imageName != '' %}{{ vich_uploader_asset(entity, 'photo') }}{% else %}http://www.condellispaul.gr/images/no-photo.jpg{% endif %}) no-repeat center center;height:350px;"></div>
+            <li class="span4">
+                <div class="thumbnail" >
+                    {#<img src="" alt="" style="height: 350px; width: auto;max-width:none"/>#}
+                    <div style="background:url({% if entity.imageName != '' %}{{ vich_uploader_asset(entity, 'photo') }}{% else %}http://www.condellispaul.gr/images/no-photo.jpg{% endif %}) no-repeat center center;height:350px;"></div>
 
-                <div class="caption">
-                    <h3>{{ entity.name }}</h3>
-                    <p>
-                        Rok produkcji: <b>{{ entity.year }}</b>
-                    </p>
-                    <p>
-                        Koszt dziennego wypożyczenia: <b>{{ entity.price }}</b>
-                    </p>
-                    <p>
-                        Wolnych pojazdów: <b>{{ entity.amount }}</b>
-                    </p>
-                    <p>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a class="btn" href="{{ path('car_edit', { 'id': entity.id }) }}">
-                                {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+                    <div class="caption">
+                        <h3>{{ entity.name }}</h3>
+                        <p>
+                            Rok produkcji: <b>{{ entity.year }}</b>
+                        </p>
+                        <p>
+                            Koszt dziennego wypożyczenia: <b>{{ entity.price }}</b>
+                        </p>
+                        <p>
+                            Wolnych pojazdów: <b>{{ entity.amount }}</b>
+                        </p>
+                        <p>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn" href="{{ path('car_edit', { 'id': entity.id }) }}">
+                                    {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+                                </a>
+                            {% endif %}
+                            <a class="btn" href="{{ path('car_show', { 'id': entity.id }) }}">
+                                {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
                             </a>
-                        {% endif %}
-                        <a class="btn" href="{{ path('car_show', { 'id': entity.id }) }}">
-                            {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-                        </a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+            {% if loop.index %3 == 0 %}
+
+        </ul>
+    </div>
+        <div class="row-fluid">
+            <ul class="thumbnails">
+                {% endif %}
+
         {% endfor %}
     </ul>
 </div>
