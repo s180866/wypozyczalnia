@@ -31,7 +31,7 @@ Samochód {{ entity.name }}
         <div class="control-group">
             <label class="control-label">Zdjęcie</label>
             <div class="controls">
-                <img src="{{ vich_uploader_asset(entity, 'photo')|default('http://www.condellispaul.gr/images/no-photo.jpg') }}"
+                <img src="{{ asset(vich_uploader_asset(entity, 'photo')|default('http://www.condellispaul.gr/images/no-photo.jpg')) }}"
                 style="max-height: 450px;"/>
             </div>
         </div>

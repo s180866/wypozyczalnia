@@ -13,7 +13,7 @@ Wypożyczalnia samochodów
             <li class="span4">
                 <div class="thumbnail" >
                     {#<img src="" alt="" style="height: 350px; width: auto;max-width:none"/>#}
-                    <div style="background:url({% if entity.imageName != '' %}{{ vich_uploader_asset(entity, 'photo') }}{% else %}http://www.condellispaul.gr/images/no-photo.jpg{% endif %}) no-repeat center center;height:350px;"></div>
+                    <div style="background:url({% if entity.imageName != '' %}{{ asset(vich_uploader_asset(entity, 'photo')) }}{% else %}http://www.condellispaul.gr/images/no-photo.jpg{% endif %}) no-repeat center center;height:350px;"></div>
 
                     <div class="caption">
                         <h3>{{ entity.name }}</h3>
