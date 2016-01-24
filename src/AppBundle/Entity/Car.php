@@ -78,6 +78,25 @@ class Car
     private $updatedAt;
 
     /**
+     * Car constructor.
+     * @param string $name
+     * @param int $year
+     * @param int $amount
+     * @param File $photo
+     * @param string $price
+     */
+    public function __construct($name, $year, $amount, $photo, $price)
+    {
+        $this->name = $name;
+        $this->year = $year;
+        $this->amount = $amount;
+        $this->setPhoto($photo);
+        $this->price = $price;
+        $this->imageName = $photo->getFilename();
+    }
+
+
+    /**
      * Get id
      *
      * @return integer 
